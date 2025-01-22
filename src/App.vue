@@ -2,7 +2,7 @@
   <div id="app">
     <div>
       <h1>Саджест на Vue 3</h1>
-      <autocomplete></autocomplete>
+      <TheAutocomplete></TheAutocomplete>
     </div>
     <div>
       <h1>UI</h1>
@@ -16,8 +16,8 @@
 </template>
 
 <script setup lang="ts">
-import Autocomplete from "@/features/autocomplete/ui/autocomplete.vue";
 import HChip from "@/shared/HChip/HChip.vue";
+import TheAutocomplete from "@/features/autocomplete/ui/TheAutocomplete.vue";
 
 const onClear = () => {
   console.log('app HCip @clear')

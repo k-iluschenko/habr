@@ -1,13 +1,14 @@
 import { ref } from 'vue';
-import { fetchSuggestions } from '../api/fetchSuggestions';
-import axios from 'axios';
+import { fetchSuggestions } from '../api/fetchSuggestions.js';
+import axios, {type CancelTokenSource} from 'axios';
+import type {Suggestions} from "@/shared/types/suggestions.ts";
 
 export const useSuggestions = () => {
-  const suggestions = ref([]);
-  const loading = ref(false);
-  const cancelTokenSource = ref(null);
+  const suggestions = ref<Suggestions>([]);
+  const loading = ref<boolean>(false);
+  const cancelTokenSource = ref<CancelTokenSource | null>(null);
 
-  const loadSuggestions = async (query) => {
+  const loadSuggestions = async (query: string) => {
     if (cancelTokenSource.value) {
       cancelTokenSource.value.cancel('Operation canceled by the user.');
     }

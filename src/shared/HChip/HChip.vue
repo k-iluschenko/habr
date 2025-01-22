@@ -9,7 +9,7 @@ const emit = defineEmits<{
 
 <template>
 <div :class="$style.chip">
-  <span>{{label}}</span>
+  <span>@{{label}}</span>
   <span @click.prevent="emit('clear')">x</span>
 </div>
 </template>

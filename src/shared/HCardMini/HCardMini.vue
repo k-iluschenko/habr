@@ -1,14 +1,18 @@
 <script setup lang="ts">
 import userIcon from '/assets/img/user.svg'
 import {computed} from "vue";
+import type {Suggestion} from "@/shared/types/suggestions.ts";
+import {SuggestionTypeEnum} from "@/shared/constants/suggestions.ts";
 
-const props = defineProps({
-  isActive: Boolean,
-  suggestion: {}
-})
+const props = defineProps<{
+  isActive: boolean
+  suggestion: NonNullable<Suggestion>
+}>();
 
 const prepareAlias = computed(() => {
-  return props.suggestion.type === 'company' ? 'Компания' : `@${props.suggestion.alias}`
+  return props.suggestion.type === SuggestionTypeEnum.company
+    ? 'Компания'
+    : `@${props.suggestion.alias}`
 })
 </script>
 
@@ -19,9 +23,9 @@ const prepareAlias = computed(() => {
       {[$style.isActive]: isActive}
     ]
   ">
-    <img :src="suggestion.avatar ?? userIcon" :alt="suggestion.name">
+    <img :src="suggestion?.avatar ?? userIcon" :alt="suggestion?.alias">
     <div :class="$style.memberInfo">
-      <span v-if="suggestion.name">{{suggestion.name}}</span>
+      <span v-if="suggestion?.name">{{suggestion.name}}</span>
       <span>{{ prepareAlias }}</span>
     </div>
   </div>

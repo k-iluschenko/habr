@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useAutocomplete } from '../model/useAutocomplete';
+import { useAutocomplete } from '../model/useAutocomplete.ts';
 import SuggestionList from '@/entities/suggestion/ui/SuggestionList.vue';
 import HChip from "@/shared/HChip/HChip.vue";
 
@@ -13,7 +13,7 @@ const {
   currentSuggestion
 } = useAutocomplete();
 
-const selectSuggestion = (index) => {
+const selectSuggestion = (index: number) => {
   currentSuggestion.value = suggestions.value[index];
   query.value = suggestions.value[index].name ?? suggestions.value[index].alias;
 };
@@ -24,18 +24,16 @@ const clearCurrentSuggestion = () => {
 </script>
 <template>
   <div class="autocomplete" @keydown="handleKeydown">
-    {{ currentSuggestion}}
     <div>
-      <HChip v-if="currentSuggestion" :label="currentSuggestion?.alias" @clear="clearCurrentSuggestion"></HChip>
+      <HChip v-if="currentSuggestion?.alias" :label="currentSuggestion?.alias" @clear="clearCurrentSuggestion"></HChip>
       <input
         type="text"
         v-model="query"
-        @input="handleInput($event.target.value)"
+        @input="handleInput($event?.target?.value)"
         :aria-expanded="suggestions.length > 0"
         aria-autocomplete="list"
       />
     </div>
-
     <SuggestionList
       v-if="suggestions.length > 0"
       :suggestions="suggestions"

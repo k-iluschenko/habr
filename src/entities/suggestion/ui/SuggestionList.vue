@@ -19,7 +19,6 @@ function onSelectSuggestion(index: number) {
 
 <template>
   <ul
-    v-if="suggestions.length"
     :class="$style.suggestionList"
     role="listbox"
     :aria-expanded="visible"
@@ -37,6 +36,7 @@ function onSelectSuggestion(index: number) {
       <HCardMini
       :is-active="index === activeIndex"
       :suggestion="suggestion"
+      :class="$style.card"
       ></HCardMini>
     </li>
   </ul>
@@ -57,5 +57,11 @@ function onSelectSuggestion(index: number) {
 
   .suggestionItem {
     cursor: pointer;
+  }
+
+  .card {
+    &:hover{
+      background-color: #cccccc;
+    }
   }
 </style>

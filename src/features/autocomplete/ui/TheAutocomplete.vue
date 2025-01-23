@@ -101,15 +101,21 @@ const clearMultipleCurrentSuggestion = (value?: string) => {
         :aria-expanded="focused && suggestions.length > 0"
         aria-autocomplete="list"
       />
-      <HLoader v-if="loading"></HLoader>
+      <HLoader
+        v-if="loading"
+        :class="$style.loader"
+      ></HLoader>
     </div>
-    <SuggestionList
-      v-if="focused && suggestions.length > 0"
-      :suggestions="suggestions"
-      :activeIndex="activeIndex"
-      :visible="focused"
-      @selectSuggestion="selectSuggestion"
-    />
+    <div :class="$style.suggestionsWrapper">
+      <SuggestionList
+        v-if="focused && suggestions.length > 0"
+        :class="$style.suggestionsList"
+        :suggestions="suggestions"
+        :activeIndex="activeIndex"
+        :visible="focused"
+        @selectSuggestion="selectSuggestion"
+      />
+    </div>
     <div v-if="errorMessage">{{ errorMessage }}</div>
   </div>
 </template>
@@ -151,6 +157,7 @@ const clearMultipleCurrentSuggestion = (value?: string) => {
     min-width: 150px;
     border: none;
     outline: none;
+    padding-inline-end: 30px;
   }
 
   .loading {
@@ -160,5 +167,21 @@ const clearMultipleCurrentSuggestion = (value?: string) => {
 
   .required {
     color: red;
+  }
+
+  .suggestionsWrapper {
+    position: relative;
+  }
+
+  .suggestionsList {
+    position: absolute;
+    right: 0;
+    z-index: 2;
+  }
+
+  .loader {
+    position: absolute;
+    right: 8px;
+    bottom: 6px;
   }
 </style>

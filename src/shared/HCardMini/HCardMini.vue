@@ -5,10 +5,14 @@ import { computed } from 'vue';
 import type { Suggestion } from '@/shared/types/suggestions.ts';
 import { SuggestionTypeEnum } from '@/shared/constants/suggestions.ts';
 
-const props = defineProps<{
-  isActive: boolean
+interface Props {
+  isActive?: boolean
   suggestion: NonNullable<Suggestion>
-}>();
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  isActive: false,
+});
 
 const prepareAlias = computed(() => {
   return props.suggestion.type === SuggestionTypeEnum.company
@@ -44,10 +48,6 @@ const defaultIcon = computed(() => {
     align-items: center;
     padding: 10px 8px;
     gap: 8px;
-
-    &:hover {
-      @extend .isActive
-    }
   }
 
   .isActive {

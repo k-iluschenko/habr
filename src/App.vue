@@ -1,10 +1,15 @@
 <template>
   <div id="app">
     <div>
-      <TheAutocomplete></TheAutocomplete>
-      <div>
-        Выбран: {{ currentSuggestion?.alias }}
+      <div :class="$style.cardWrapper">
+        Вывод в App:
+        <HCardMini
+          v-if="currentSuggestion"
+          :class="$style.card"
+          :suggestion="currentSuggestion"
+        ></HCardMini>
       </div>
+      <TheAutocomplete></TheAutocomplete>
     </div>
     <div>
       <TheAutocomplete
@@ -20,6 +25,7 @@
 <script setup lang="ts">
 import TheAutocomplete from '@/features/autocomplete/ui/TheAutocomplete.vue';
 import { useAutocomplete } from '@/features/autocomplete/model/useAutocomplete';
+import HCardMini from '@/shared/HCardMini/HCardMini.vue';
 const {
   currentSuggestion
 } = useAutocomplete();
@@ -34,5 +40,16 @@ const {
     display: flex;
     flex-direction: column;
     gap: 20px;
+  }
+</style>
+
+<style module lang="scss">
+  .cardWrapper {
+    margin: 40px;
+  }
+
+  .card {
+    border: 1px solid #cccccc;
+    width: 200px;
   }
 </style>

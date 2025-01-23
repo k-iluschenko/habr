@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import userIcon from '/assets/img/user.svg';
-import companyIcon from '/assets/img/building-icon.svg';
+import companyIcon from '/assets/img/company.svg';
 import { computed } from 'vue';
 import type { Suggestion } from '@/shared/types/suggestions.ts';
 import { SuggestionTypeEnum } from '@/shared/constants/suggestions.ts';

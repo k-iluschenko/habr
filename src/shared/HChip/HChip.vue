@@ -1,16 +1,18 @@
 <script setup lang="ts">
+import type { PropType } from 'vue';
+
 defineProps({
-  label: String
-})
+  alias: String as PropType<string>
+});
 const emit = defineEmits<{
-  (e: 'clear'): void,
+  (e: 'clear', label?: string): void,
 }>();
 </script>
 
 <template>
 <div :class="$style.chip">
-  <span>@{{label}}</span>
-  <span @click.prevent="emit('clear')">x</span>
+  <span>@{{ alias }}</span>
+  <span @click.prevent="emit('clear', alias)">x</span>
 </div>
 </template>
 
@@ -22,6 +24,7 @@ const emit = defineEmits<{
     padding: 4px;
     display: flex;
     flex-direction: row;
+    align-items: center;
     gap: 10px;
     width: fit-content;
     border-radius: 2px;

@@ -1,27 +1,28 @@
 <template>
   <div id="app">
     <div>
-      <h1>Саджест на Vue 3</h1>
       <TheAutocomplete></TheAutocomplete>
+      <div>
+        Выбран: {{ currentSuggestion?.alias }}
+      </div>
     </div>
     <div>
-      <h1>UI</h1>
-      <div>
-        <HChip
-          label="@mail"
-          @clear="onClear"
-        ></HChip></div>
+      <TheAutocomplete
+        placeholder="Поиск пользователя"
+        label="Поиск"
+        multiple
+        required
+      ></TheAutocomplete>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import HChip from "@/shared/HChip/HChip.vue";
-import TheAutocomplete from "@/features/autocomplete/ui/TheAutocomplete.vue";
-
-const onClear = () => {
-  console.log('app HCip @clear')
-}
+import TheAutocomplete from '@/features/autocomplete/ui/TheAutocomplete.vue';
+import { useAutocomplete } from '@/features/autocomplete/model/useAutocomplete';
+const {
+  currentSuggestion
+} = useAutocomplete();
 </script>
 
 <style>
@@ -29,7 +30,9 @@ const onClear = () => {
     max-width: 600px;
     margin: 50px auto;
     font-family: Arial, sans-serif;
+
     display: flex;
+    flex-direction: column;
     gap: 20px;
   }
 </style>

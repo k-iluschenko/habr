@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import HCardMini from "@/shared/HCardMini/HCardMini.vue";
-import type {Suggestions} from "@/shared/types/suggestions.ts";
+import HCardMini from '@/shared/HCardMini/HCardMini.vue';
+import type { Suggestions } from '@/shared/types/suggestions.ts';
 
 defineProps<{
-  suggestions: Suggestions ,
+  suggestions: Suggestions,
   visible?: boolean,
   activeIndex: number,
 }>();
 
 const emit = defineEmits<{
 (e: 'selectSuggestion', arg: number) : void,
-}>()
+}>();
 
 function onSelectSuggestion(index: number) {
-  emit('selectSuggestion', index)
+  emit('selectSuggestion', index);
 }
 </script>
 
@@ -49,7 +49,7 @@ function onSelectSuggestion(index: number) {
     padding: 0;
     background: #fff;
     border: 1px solid #ccc;
-    height: 200px;
+    max-height: 220px;
     width: 200px;
     overflow: auto;
     overscroll-behavior: contain;

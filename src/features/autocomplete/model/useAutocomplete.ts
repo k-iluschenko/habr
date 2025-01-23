@@ -1,8 +1,8 @@
 import { ref, watch } from 'vue';
 import { useSuggestions } from '@/entities/suggestion/model/useSuggestions';
-import type {Suggestion} from "@/shared/types/suggestions.ts";
+import type { Suggestion } from '@/shared/types/suggestions.ts';
 const currentSuggestion = ref<Suggestion | null>(null);
-
+const currentSuggestionMultiple = ref<Array<Suggestion>>([]);
 export const useAutocomplete = () => {
   const query = ref<string>('');
   const focused = ref<boolean>(false);
@@ -10,7 +10,8 @@ export const useAutocomplete = () => {
   const {
     suggestions,
     loading,
-    loadSuggestions
+    loadSuggestions,
+    errorMessage
   } = useSuggestions();
 
   const handleInput = (value: string) => {
@@ -26,13 +27,14 @@ export const useAutocomplete = () => {
     } else if (event.key === 'Enter' && activeIndex.value >= 0) {
       const activeSuggestion = suggestions.value[activeIndex.value];
       query.value = activeSuggestion.name ?? activeSuggestion.alias;
-      currentSuggestion.value = activeSuggestion
+      currentSuggestion.value = activeSuggestion;
       activeIndex.value = -1;
     }
   };
 
-  watch(query, async (newQuery) => {
+  watch(query, async(newQuery) => {
     if (newQuery) {
+      errorMessage.value = '';
       await loadSuggestions(newQuery);
     }
   });
@@ -44,6 +46,8 @@ export const useAutocomplete = () => {
     suggestions,
     loading,
     currentSuggestion,
+    currentSuggestionMultiple,
+    errorMessage,
     handleInput,
     handleKeydown,
   };

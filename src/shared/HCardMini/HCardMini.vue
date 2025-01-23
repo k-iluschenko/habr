@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import userIcon from '/assets/img/user.svg'
-import {computed} from "vue";
-import type {Suggestion} from "@/shared/types/suggestions.ts";
-import {SuggestionTypeEnum} from "@/shared/constants/suggestions.ts";
+import userIcon from '/assets/img/user.svg';
+import companyIcon from '/assets/img/building-icon.svg';
+import { computed } from 'vue';
+import type { Suggestion } from '@/shared/types/suggestions.ts';
+import { SuggestionTypeEnum } from '@/shared/constants/suggestions.ts';
 
 const props = defineProps<{
   isActive: boolean
@@ -12,8 +13,14 @@ const props = defineProps<{
 const prepareAlias = computed(() => {
   return props.suggestion.type === SuggestionTypeEnum.company
     ? 'Компания'
-    : `@${props.suggestion.alias}`
-})
+    : `@${ props.suggestion.alias }`;
+});
+
+const defaultIcon = computed(() => {
+  return props.suggestion.type === SuggestionTypeEnum.company
+    ? companyIcon
+    : userIcon;
+});
 </script>
 
 <template>
@@ -23,9 +30,9 @@ const prepareAlias = computed(() => {
       {[$style.isActive]: isActive}
     ]
   ">
-    <img :src="suggestion?.avatar ?? userIcon" :alt="suggestion?.alias">
+    <img :src="suggestion?.avatar ?? defaultIcon" :alt="suggestion?.alias">
     <div :class="$style.memberInfo">
-      <span v-if="suggestion?.name">{{suggestion.name}}</span>
+      <span v-if="suggestion?.name">{{ suggestion.name }}</span>
       <span>{{ prepareAlias }}</span>
     </div>
   </div>
@@ -48,8 +55,8 @@ const prepareAlias = computed(() => {
   }
 
   img {
-    width: 40px;
-    height: 40px;
+    width: 32px;
+    height: 32px;
   }
 
   .memberInfo {

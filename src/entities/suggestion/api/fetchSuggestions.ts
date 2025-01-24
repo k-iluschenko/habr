@@ -25,6 +25,10 @@ export const fetchSuggestions = async(query: string, cancelToken: CancelToken) =
         if (error.status === 500) {
           throw new Error('Ошибка на сервере');
         }
+
+        if (error.response?.data.data) {
+          throw new Error(error.response?.data.data.q[0]);
+        }
       }
 
       console.error(error);

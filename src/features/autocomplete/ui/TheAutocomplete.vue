@@ -116,7 +116,10 @@ const clearMultipleCurrentSuggestion = (value?: string) => {
         @selectSuggestion="selectSuggestion"
       />
     </div>
-    <div v-if="errorMessage">{{ errorMessage }}</div>
+    <div
+      v-if="errorMessage"
+      :class="$style.errorMessage"
+    >{{ errorMessage }}</div>
   </div>
 </template>
 
@@ -183,5 +186,10 @@ const clearMultipleCurrentSuggestion = (value?: string) => {
     position: absolute;
     right: 8px;
     bottom: 6px;
+  }
+
+  .errorMessage {
+    color: red;
+    font-size: 12px;
   }
 </style>

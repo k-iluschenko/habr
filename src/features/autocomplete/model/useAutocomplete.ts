@@ -3,7 +3,8 @@ import { useSuggestions } from '@/entities/suggestion/model/useSuggestions';
 import type { Suggestion } from '@/shared/types/suggestions.ts';
 const currentSuggestion = ref<Suggestion | null>(null);
 const currentSuggestionMultiple = ref<Array<Suggestion>>([]);
-export const useAutocomplete = () => {
+
+export const useAutocomplete = (multiple?: boolean) => {
   const query = ref<string>('');
   const focused = ref<boolean>(false);
   const activeIndex = ref<number>(-1);
@@ -26,8 +27,13 @@ export const useAutocomplete = () => {
         (activeIndex.value - 1 + suggestions.value.length) % suggestions.value.length;
     } else if (event.key === 'Enter' && activeIndex.value >= 0) {
       const activeSuggestion = suggestions.value[activeIndex.value];
-      query.value = activeSuggestion.name ?? activeSuggestion.alias;
-      currentSuggestion.value = activeSuggestion;
+      query.value = '';
+
+      if (multiple) {
+        currentSuggestionMultiple.value.push(activeSuggestion);
+      } else {
+        currentSuggestion.value = activeSuggestion;
+      }
       activeIndex.value = -1;
     }
   };

@@ -35,7 +35,7 @@ const {
   currentSuggestion,
   currentSuggestionMultiple,
   errorMessage
-} = useAutocomplete();
+} = useAutocomplete(props.multiple);
 
 const onChange = debounce((value: HTMLInputElement) => {
   handleInput(value.value);

@@ -53,6 +53,8 @@ function onSelectSuggestion(index: number) {
     width: 200px;
     overflow: auto;
     overscroll-behavior: contain;
+    box-shadow: 0 7px 10px #e1dddd;
+    scrollbar-width: thin;
   }
 
   .suggestionItem {

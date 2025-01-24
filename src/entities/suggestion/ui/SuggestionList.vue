@@ -50,7 +50,7 @@ function onSelectSuggestion(index: number) {
     background: #fff;
     border: 1px solid #ccc;
     max-height: 220px;
-    width: 200px;
+    width: 250px;
     overflow: auto;
     overscroll-behavior: contain;
     box-shadow: 0 7px 10px #e1dddd;

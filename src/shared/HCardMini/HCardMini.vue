@@ -36,7 +36,7 @@ const defaultIcon = computed(() => {
   ">
     <img :src="suggestion?.avatar ?? defaultIcon" :alt="suggestion?.alias">
     <div :class="$style.memberInfo">
-      <span v-if="suggestion?.name">{{ suggestion.name }}</span>
+      <span v-if="suggestion?.name" v-html="suggestion.name"></span>
       <span>{{ prepareAlias }}</span>
     </div>
   </div>

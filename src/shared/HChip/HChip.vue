@@ -10,7 +10,12 @@ const emit = defineEmits<{
 </script>
 
 <template>
-<div :class="$style.chip" tabindex="0" @keydown.enter="emit('clear', alias)">
+<div
+  :class="$style.chip"
+  tabindex="0"
+  role="button"
+  @keydown.enter="emit('clear', alias)"
+>
   <span>@{{ alias }}</span>
   <span @click.prevent="emit('clear', alias)">x</span>
 </div>

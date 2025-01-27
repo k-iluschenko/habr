@@ -99,7 +99,7 @@ const clearMultipleCurrentSuggestion = (value?: string) => {
         @focus="focused = true"
         @blur="focused = false"
         :aria-expanded="focused && suggestions.length > 0"
-        aria-autocomplete="list"
+        :aria-autocomplete="multiple ? 'list' : 'both'"
       />
       <HLoader
         v-if="loading"
